@@ -1,27 +1,52 @@
-# NgxToast
+# ngx-toast
+<p align="center">
+  <img alt="Ngx-Markdown Logo" src="https://ngx-validator.angularmagic.com/assets/cover.png">
+</p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
+**Demo: https://ngx-toast.angularmagic.com**
 
-## Development server
+This module contain Angular Toast/Notification functionality, which you can use instantly after installation, and then you can customize it.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+[![NPM](https://nodei.co/npm/@angular-magic/ngx-toast.png)](https://nodei.co/npm/@angular-magic/ngx-toast/)
 
-## Code scaffolding
+# Installation
+#### npm
+```
+npm install @angular-magic/ngx-toast
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+# Integration
+1. Import NgxToastModule into your application module
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```ts
+import { NgxToastModule } from "@angular-magic/ngx-toast";
 
-## Running unit tests
+@NgModule({
+  imports: [
+    NgxGpAutocompleteModule,
+    BrowserModule,
+    FormsModule,
+    ...],
+  ....
+})
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. Add toast center in your app component
+```
+<ngx-toast-center></ngx-toast-center>
+```
+3. Now you can inject `NgxToastService` and use standard types of notification (success, error, warning & info) or use `open` method to create your custom notification.
 
-## Running end-to-end tests
+```ts
+import { NgxToastService } from "@angular-magic/toast.service";
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+constructor(
+  private ngxToastService: NgxToastService
+) {
+    this.ngxToastService.success({title: 'Success', messages: ['User successfully updated!']})
+}
+```
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# GitHub
+Please feel free to declare issues or contribute: https://github.com/angular-magic/ngx-gp-autocomplete

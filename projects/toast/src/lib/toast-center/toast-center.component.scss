@@ -1,0 +1,13 @@
+.ngx-toast__wrapper {
+  position: absolute;
+
+  & > * {
+    display: block;
+    margin-bottom: 10px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+

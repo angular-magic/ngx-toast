@@ -1,0 +1,10 @@
+<div class="ngx-toast__wrapper" [ngStyle]="ngxToastService.position">
+  <ng-container *ngFor="let toast of toasts$ | async">
+    <ngx-toast [toast]="toast"
+               [displayProgressBar]="ngxToastService?.displayProgressBar"
+               [color]="toast.color || ngxToastService?.typeColor[toast.type]"
+               [delay]="toast?.delay || ngxToastService?.typeDelays[toast.type]"
+               (destroyed)="remove($event)">
+    </ngx-toast>
+  </ng-container>
+</div>
