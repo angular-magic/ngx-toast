@@ -49,4 +49,4 @@ constructor(
 ```
 
 # GitHub
-Please feel free to declare issues or contribute: https://github.com/angular-magic/ngx-gp-autocomplete
+Please feel free to declare issues or contribute: https://github.com/angular-magic/ngx-toast
