@@ -1,24 +1,52 @@
-# Toast
+# ngx-toast
+<p align="center">
+  <img alt="Ngx-Markdown Logo" src="https://ngx-validator.angularmagic.com/assets/cover.png">
+</p>
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.0.
+**Demo: https://ngx-toast.angularmagic.com**
 
-## Code scaffolding
+This module contain Angular Toast/Notification functionality, which you can use instantly after installation, and then you can customize it.
 
-Run `ng generate component component-name --project toast` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project toast`.
-> Note: Don't forget to add `--project toast` or else it will be added to the default project in your `angular.json` file. 
+[![NPM](https://nodei.co/npm/@angular-magic/ngx-toast.png)](https://nodei.co/npm/@angular-magic/ngx-toast/)
 
-## Build
+# Installation
+#### npm
+```
+npm install @angular-magic/ngx-toast
+```
 
-Run `ng build toast` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Publishing
+# Integration
+1. Import NgxToastModule into your application module
 
-After building your library with `ng build toast`, go to the dist folder `cd dist/toast` and run `npm publish`.
+```ts
+import { NgxToastModule } from "@angular-magic/ngx-toast";
 
-## Running unit tests
+@NgModule({
+  imports: [
+    NgxGpAutocompleteModule,
+    BrowserModule,
+    FormsModule,
+    ...],
+  ....
+})
+```
 
-Run `ng test toast` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. Add toast center in your app component
+```
+<ngx-toast-center></ngx-toast-center>
+```
+3. Now you can inject `NgxToastService` and use standard types of notification (success, error, warning & info) or use `open` method to create your custom notification.
 
-## Further help
+```ts
+import { NgxToastService } from "@angular-magic/toast.service";
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+constructor(
+  private ngxToastService: NgxToastService
+) {
+    this.ngxToastService.success({title: 'Success', messages: ['User successfully updated!']})
+}
+```
+
+# GitHub
+Please feel free to declare issues or contribute: https://github.com/angular-magic/ngx-toast
