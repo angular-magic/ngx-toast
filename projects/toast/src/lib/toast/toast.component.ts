@@ -24,7 +24,9 @@ export class ToastComponent implements OnInit, AfterViewInit {
   @Input() displayProgressBar: boolean = true;
   @Output() clicked: EventEmitter<NgxToast> = new EventEmitter<NgxToast>();
   @Output() destroyed: EventEmitter<NgxToast> = new EventEmitter<NgxToast>();
+  @Output() closed: EventEmitter<NgxToast> = new EventEmitter<NgxToast>();
   isOpened: boolean;
+  isInfinity: boolean;
   NgxToastType: typeof NgxToastType = NgxToastType;
 
   private static DELAY_ON_CLICK: number = 400;
@@ -43,6 +45,7 @@ export class ToastComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.init();
+    this.isInfinity = this.delay === Infinity;
   }
 
   ngAfterViewInit(): void {
@@ -72,9 +75,15 @@ export class ToastComponent implements OnInit, AfterViewInit {
     }
   }
 
-  toastClose(): void {
+  toastDestroy(): void {
     if (this.toast.destroy) {
       this.toast.destroy(this.toast);
+    }
+  }
+
+  toastClose(): void {
+    if (this.toast.close) {
+      this.toast.close(this.toast);
     }
   }
 
@@ -82,6 +91,8 @@ export class ToastComponent implements OnInit, AfterViewInit {
     this.isOpened = false;
 
     setTimeout(() => {
+      this.toastClose();
+      this.closed.emit(this.toast);
     }, ToastComponent.DELAY_ON_CLICK);
   }
 
@@ -97,14 +108,16 @@ export class ToastComponent implements OnInit, AfterViewInit {
   }
 
   private autoSelfDestroy(delay: number): void {
-    this.closeTimeout = setTimeout(() => {
-      this.isOpened = false;
-      this.cd.markForCheck();
-    }, delay);
+    if (this.delay !== Infinity) {
+      this.closeTimeout = setTimeout(() => {
+        this.isOpened = false;
+        this.cd.markForCheck();
+      }, delay);
 
-    this.destroyTimeout = setTimeout(() => {
-      this.destroyed.emit(this.toast);
-      this.toastClose();
-    }, delay + ToastComponent.DELAY_ON_CLICK);
+      this.destroyTimeout = setTimeout(() => {
+        this.destroyed.emit(this.toast);
+        this.toastDestroy();
+      }, delay + ToastComponent.DELAY_ON_CLICK);
+    }
   }
 }

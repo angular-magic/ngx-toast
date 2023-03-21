@@ -165,40 +165,40 @@ export class NgxToastService {
     switch (position) {
       case NgxToastPosition.TOP_RIGHT:
         return {
-          top: '10px',
-          right: '10px'
+          top: '20px',
+          right: '20px'
         };
       case NgxToastPosition.TOP_CENTER:
         return {
-          top: '10px',
+          top: '20px',
           right: '50%',
           transform: `translateX(50%)`
         };
       case NgxToastPosition.TOP_LEFT:
         return {
-          top: '10px',
-          left: '10px'
+          top: '20px',
+          left: '20px'
         };
       case NgxToastPosition.BOTTOM_RIGHT:
         return {
-          bottom: '10px',
-          right: '10px'
+          bottom: '20px',
+          right: '20px'
         };
       case NgxToastPosition.BOTTOM_CENTER:
         return {
-          bottom: '10px',
+          bottom: '20px',
           right: '50%',
           transform: `translateX(50%)`
         };
       case NgxToastPosition.BOTTOM_LEFT:
         return {
-          bottom: '10px',
-          left: '10px'
+          bottom: '20px',
+          left: '20px'
         };
       default:
         return {
-          top: '10px',
-          right: '10px'
+          top: '20px',
+          right: '20px'
         };
     }
   }

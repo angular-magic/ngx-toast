@@ -14,9 +14,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(Infinity);
     this.ngxToastService.success({ title: 'Success', messages: ['User was successfully updated!'] });
     this.ngxToastService.error({
       title: 'Success', messages: ['User was successfully updated!', 'User was successfully updated!'],
+      delay: Infinity,
       click(item: NgxToast) {
         console.log(item);
       },

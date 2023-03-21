@@ -4,6 +4,7 @@
                [displayProgressBar]="ngxToastService?.displayProgressBar"
                [color]="toast.color || ngxToastService?.typeColor[toast.type]"
                [delay]="toast?.delay || ngxToastService?.typeDelays[toast.type]"
+               (closed)="remove($event)"
                (destroyed)="remove($event)">
     </ngx-toast>
   </ng-container>

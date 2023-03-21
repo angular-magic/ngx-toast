@@ -1,6 +1,6 @@
 <div class="ngx-toast ngx-toast-{{toast?.type}}"
      [class.ngx-toast--opened]="isOpened"
-     [class.ngx-toast--progress-bar]="displayProgressBar"
+     [class.ngx-toast--progress-bar]="displayProgressBar && !isInfinity"
      (mouseenter)="mouseEnter()"
      (mouseleave)="mouseLeave()">
   <div (click)="toastClick()" class="ngx-toast__icon">
