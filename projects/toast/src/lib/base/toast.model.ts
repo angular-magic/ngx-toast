@@ -6,7 +6,7 @@ export interface NgxToast {
   id?: number | string;
   title?: string;
   icon?: string; // Path to SVG item
-  delay?: number; // 0 Means
+  delay?: number; // Use Infinity to avoid delay
   color?: string;
   destroy?(item: NgxToast): void;
   click?(item: NgxToast): void;

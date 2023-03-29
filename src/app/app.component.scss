@@ -1,0 +1,30 @@
+.container {
+  width: 500px;
+  margin: 100px auto 0;
+}
+
+mat-form-field {
+  display: block;
+}
+
+.show {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.switcher-wrapper {
+  margin: 20px 0;
+}
+
+.multiple-switcher {
+  margin-bottom: 30px;
+}
+
+.double {
+  display: flex;
+  gap: 20px;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
