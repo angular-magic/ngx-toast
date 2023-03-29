@@ -24,7 +24,7 @@ import { NgxToastModule } from "@angular-magic/ngx-toast";
 
 @NgModule({
   imports: [
-    NgxGpAutocompleteModule,
+    NgxToastModule,
     BrowserModule,
     FormsModule,
     ...],

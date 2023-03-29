@@ -1,1 +1,101 @@
 <ngx-toast-center></ngx-toast-center>
+
+<div class="container">
+  <h1>{{title}}</h1>
+
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" formControlName="title" required>
+    </mat-form-field>
+
+    <ng-container *ngIf="form.value['multipleMessages']; else singleMessage">
+      <mat-form-field class="example-chip-list" appearance="fill">
+        <mat-label>Messages</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Enter fruits">
+          <mat-chip-row *ngFor="let message of messages"
+                        (removed)="remove(message)"
+                        [editable]="true"
+                        (edited)="edit(message, $event)"
+                        [aria-description]="'press enter to edit ' + message">
+            {{message}}
+            <button matChipRemove [attr.aria-label]="'remove ' + message">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          <input placeholder="New message..."
+                 [matChipInputFor]="chipGrid"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)"/>
+        </mat-chip-grid>
+      </mat-form-field>
+    </ng-container>
+
+    <ng-template #singleMessage>
+      <mat-form-field appearance="fill">
+        <mat-label>Message</mat-label>
+        <input matInput type="text" formControlName="message" required>
+      </mat-form-field>
+    </ng-template>
+
+    <div class="multiple-switcher">
+      <mat-slide-toggle formControlName="multipleMessages">Multiple messages</mat-slide-toggle>
+    </div>
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Custom Color</mat-label>
+      <input matInput placeholder="Example: #01B78B" type="text" formControlName="color">
+    </mat-form-field>
+
+    <div class="double">
+      <mat-form-field appearance="fill">
+        <mat-label>Timeout</mat-label>
+        <mat-select required formControlName="timeout">
+          <mat-option *ngFor="let item of timeoutOptions" [value]="item">
+            {{item}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Position</mat-label>
+        <mat-select required formControlName="position">
+          <mat-option *ngFor="let position of positions" [value]="position">
+            {{position}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-button-toggle-group formControlName="type">
+        <mat-button-toggle [value]="NgxToastType.success">Success</mat-button-toggle>
+        <mat-button-toggle [value]="NgxToastType.error">Error</mat-button-toggle>
+        <mat-button-toggle [value]="NgxToastType.warning">Warning</mat-button-toggle>
+        <mat-button-toggle [value]="NgxToastType.info">Info</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+    <div class="switcher-wrapper">
+      <mat-slide-toggle formControlName="enableOnClick">Show alert on toast click!</mat-slide-toggle>
+    </div>
+
+    <div class="switcher-wrapper">
+      <mat-slide-toggle formControlName="enableOnDestroy">Show alert on toast destroy!</mat-slide-toggle>
+    </div>
+
+    <div class="switcher-wrapper">
+      <mat-slide-toggle formControlName="enableOnClosed">Show alert on toast manually close!</mat-slide-toggle>
+    </div>
+
+    <div class="switcher-wrapper">
+      <mat-slide-toggle formControlName="showProgress">Show progress!</mat-slide-toggle>
+    </div>
+
+    <div class="show">
+      <button (click)="show()" mat-flat-button color="primary">Show</button>
+    </div>
+  </form>
+</div>
