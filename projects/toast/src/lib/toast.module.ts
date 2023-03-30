@@ -11,7 +11,7 @@ import { ToastCustomIconPipe } from "./pipes/toast-custom-icon.pipe";
     ToastComponent,
     ToastAvailablePipe,
     ToastCustomIconPipe,
-    ToastCenterComponent
+    ToastCenterComponent,
   ],
   imports: [
     CommonModule,

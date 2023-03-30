@@ -57,6 +57,17 @@ $color-close-click: #F1F1F2;
     }
   }
 
+  &__stack-cta {
+    cursor: pointer;
+    line-height: 1.5;
+    font-size: 13px;
+    color: $color-body;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   &__icon {
     width: 81px;
     display: flex;

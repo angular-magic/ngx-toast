@@ -30,6 +30,8 @@ export class AppComponent implements OnInit {
   }
 
   show(): void {
+    this.ngxToastService.maxUnstackedToast = this.form.value.enableStack ? 3 : 100;
+
     this.ngxToastService.setPosition(this.form.value.position);
     this.ngxToastService.displayProgressBar = this.form.value.showProgress;
     let messages = [this.form.value.message];
@@ -115,6 +117,7 @@ export class AppComponent implements OnInit {
       enableOnDestroy: [false],
       enableOnClosed: [false],
       showProgress: [true],
+      enableStack: [false],
     })
   }
 }
