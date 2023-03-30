@@ -19,12 +19,14 @@ import { NgxToastService } from "../toast.service";
 })
 export class ToastComponent implements OnInit, AfterViewInit {
   @Input() toast: NgxToast;
+  @Input() isStackToast: boolean;
   @Input() color: string;
   @Input() delay = 3000;
   @Input() displayProgressBar: boolean = true;
   @Output() clicked: EventEmitter<NgxToast> = new EventEmitter<NgxToast>();
   @Output() destroyed: EventEmitter<NgxToast> = new EventEmitter<NgxToast>();
   @Output() closed: EventEmitter<NgxToast> = new EventEmitter<NgxToast>();
+  @Output() showStacked: EventEmitter<void> = new EventEmitter<void>();
   isOpened: boolean;
   isInfinity: boolean;
   NgxToastType: typeof NgxToastType = NgxToastType;

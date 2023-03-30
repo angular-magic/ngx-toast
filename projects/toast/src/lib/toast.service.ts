@@ -9,12 +9,14 @@ import { NgxToastPosition } from "./base/toast-position.enum";
 })
 export class NgxToastService {
   typeColor: Record<NgxToastType, string> = {
+    [NgxToastType.none]: '#0067FF',
     [NgxToastType.info]: '#0067FF',
     [NgxToastType.warning]: '#EF8D32',
     [NgxToastType.error]: '#FE355A',
     [NgxToastType.success]: '#00CC69'
   };
   typeIcons: Record<NgxToastType, string> = {
+    [NgxToastType.none]: null,
     [NgxToastType.info]: null,
     [NgxToastType.warning]: null,
     [NgxToastType.error]: null,
@@ -22,6 +24,7 @@ export class NgxToastService {
   };
 
   typeDelays: Record<NgxToastType, number> = {
+    [NgxToastType.none]: 5000,
     [NgxToastType.info]: 3000,
     [NgxToastType.warning]: 3000,
     [NgxToastType.error]: 3000,
@@ -29,12 +32,15 @@ export class NgxToastService {
   };
 
   typeTitles: Record<NgxToastType, string> = {
+    [NgxToastType.none]: 'Notification',
     [NgxToastType.info]: 'Info',
     [NgxToastType.warning]: 'Warning',
     [NgxToastType.error]: 'Failure',
     [NgxToastType.success]: 'Success',
   };
   displayProgressBar: boolean = true;
+  maxUnstackedToast: number = 3;
+  stackNotificationCTA: string = 'Click here to see all notifications!';
   position: Record<string, string>;
 
   private toasts: BehaviorSubject<NgxToast[]> = new BehaviorSubject<NgxToast[]>([]);
@@ -102,6 +108,10 @@ export class NgxToastService {
     const items = this.toasts.value.filter(item => item?.id !== toast?.id);
 
     this.toasts.next(items);
+  }
+
+  clear(): void {
+    this.toasts.next([]);
   }
 
   getToasts(): Observable<NgxToast[]> {

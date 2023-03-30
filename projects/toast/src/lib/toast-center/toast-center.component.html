@@ -1,11 +1,27 @@
 <div class="ngx-toast__wrapper" [ngStyle]="ngxToastService.position">
-  <ng-container *ngFor="let toast of toasts$ | async">
-    <ngx-toast [toast]="toast"
-               [displayProgressBar]="ngxToastService?.displayProgressBar"
-               [color]="toast.color || ngxToastService?.typeColor[toast.type]"
-               [delay]="toast?.delay || ngxToastService?.typeDelays[toast.type]"
-               (closed)="remove($event)"
-               (destroyed)="remove($event)">
-    </ngx-toast>
+  <ng-container *ngIf="toasts$ | async as toasts">
+    <ng-container *ngIf="(toasts | toastAvailable) || !isStacked; else stacked">
+      <ng-container *ngFor="let toast of toasts">
+        <ngx-toast [toast]="toast"
+                   [displayProgressBar]="ngxToastService?.displayProgressBar"
+                   [color]="toast.color || ngxToastService?.typeColor[toast.type]"
+                   [delay]="toast?.delay || ngxToastService?.typeDelays[toast.type]"
+                   (closed)="remove($event)"
+                   (destroyed)="remove($event)">
+        </ngx-toast>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #stacked>
+      <ngx-toast [toast]="stackToast"
+                 [isStackToast]="true"
+                 [displayProgressBar]="ngxToastService?.displayProgressBar"
+                 [color]="stackToast.color || ngxToastService?.typeColor[stackToast.type]"
+                 [delay]="stackToast?.delay || ngxToastService?.typeDelays[stackToast.type]"
+                 (showStacked)="show()"
+                 (closed)="clear()"
+                 (destroyed)="clear()">
+      </ngx-toast>
+    </ng-template>
   </ng-container>
 </div>
