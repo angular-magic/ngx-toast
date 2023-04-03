@@ -1,5 +1,5 @@
 .ngx-toast__wrapper {
-  position: absolute;
+  position: fixed;
   z-index: 2;
 
   & > * {
