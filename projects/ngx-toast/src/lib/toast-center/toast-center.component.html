@@ -1,0 +1,23 @@
+<div class="ngx-toast__wrapper" [style]="position()">
+  @if (showAll()) {
+    @for (toast of toasts(); track toast.id) {
+      <ngx-toast [toast]="toast"
+                 [displayProgressBar]="displayProgressBar()"
+                 [color]="colorOf(toast)"
+                 [delay]="delayOf(toast)"
+                 (closed)="remove($event)"
+                 (destroyed)="remove($event)">
+      </ngx-toast>
+    }
+  } @else {
+    <ngx-toast [toast]="stackToast()"
+               [isStackToast]="true"
+               [displayProgressBar]="displayProgressBar()"
+               [color]="colorOf(stackToast())"
+               [delay]="delayOf(stackToast())"
+               (showStacked)="show()"
+               (closed)="clear()"
+               (destroyed)="clear()">
+    </ngx-toast>
+  }
+</div>

@@ -1,45 +1,35 @@
-<div class="ngx-toast ngx-toast-{{toast?.type}}"
-     [class.ngx-toast--opened]="isOpened"
-     [class.ngx-toast--progress-bar]="displayProgressBar && !isInfinity"
+<div class="ngx-toast ngx-toast-{{toast().type}}"
+     [class.ngx-toast--opened]="isOpened()"
+     [class.ngx-toast--progress-bar]="displayProgressBar() && !isInfinity()"
      (mouseenter)="mouseEnter()"
      (mouseleave)="mouseLeave()">
   <div (click)="toastClick()" class="ngx-toast__icon">
-    <ng-container *ngIf="toast?.icon; else defaultIcon">
-      <ng-container *ngIf="toast.icon | toastCustomIcon | async as svg">
-        <span [innerHTML]="svg"></span>
-      </ng-container>
-    </ng-container>
-
-    <ng-template #defaultIcon>
+    @if (customIcon.value(); as svg) {
+      <span [innerHTML]="svg"></span>
+    } @else {
       <span>
-          <svg>
-            <use [attr.xlink:href]="'#' + toast.type"/>
-          </svg>
+        <svg>
+          <use [attr.xlink:href]="'#' + toast().type"/>
+        </svg>
       </span>
-    </ng-template>
+    }
   </div>
   <div (click)="toastClick()" class="ngx-toast__content">
-    <div class="ngx-toast__title">{{toast.title}}</div>
+    <div class="ngx-toast__title">{{toast().title}}</div>
 
-    <ng-container *ngIf="!isStackToast; else stackCta">
-      <ng-container *ngIf="toast?.messages?.length === 1; else multipleMessages">
-        <div class="ngx-toast__message">{{toast?.messages[0]}}</div>
-      </ng-container>
-
-      <ng-template #multipleMessages>
-        <div class="ngx-toast__message">
-          <ul>
-            <li *ngFor="let message of toast?.messages">
-              {{message}}
-            </li>
-          </ul>
-        </div>
-      </ng-template>
-    </ng-container>
-
-    <ng-template #stackCta>
-      <div class="ngx-toast__stack-cta" (click)="showStacked.emit()">{{toast?.messages[0]}}</div>
-    </ng-template>
+    @if (isStackToast()) {
+      <div class="ngx-toast__stack-cta" (click)="showStacked.emit()">{{toast().messages[0]}}</div>
+    } @else if (toast().messages.length === 1) {
+      <div class="ngx-toast__message">{{toast().messages[0]}}</div>
+    } @else {
+      <div class="ngx-toast__message">
+        <ul>
+          @for (message of toast().messages; track $index) {
+            <li>{{message}}</li>
+          }
+        </ul>
+      </div>
+    }
   </div>
 
   <div (click)="close()" class="ngx-toast__close">
